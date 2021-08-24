@@ -53,7 +53,7 @@ float lastPos = 0;
 
 
 void setup(){
-  size(displayWidth,displayHeight);
+  size(displayWidth,500);
 //  fullScreen();
    pixelDensity(displayDensity());
   surface.setResizable(true);
@@ -62,7 +62,7 @@ void setup(){
   }
   
    println(Serial.list());
-   myPort = new Serial(this,"com4", 9600);
+   myPort = new Serial(this,"com3", 9600);
    myPort.bufferUntil('\n');
  
   
@@ -91,7 +91,7 @@ void draw(){
    
  // getting dirction
  if(data[0] < 0.3){dir = false;}
- if(data[0] > 30){dir = true;lastDir = dir;}
+ if(data[0] >= range){dir = true;lastDir = dir;}
  
  //**************************************************************
  // calculations 
@@ -212,13 +212,13 @@ void serialEvent(Serial myPort) {
  // color variables:
  if (inByte.length >= 1) {
  // map them to the Range 0-255:
- data[0] = inByte[0]/10;
+ data[0] = inByte[0];
  data[1] = inByte[1];
  //data[2] = inByte[3];
 
  
    
- //println(data[6]+" "+state);
+ //println(data[0]+"  "+data[1]);
   
  }
  }
